@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<head>
+		<title>IGNORED</title>
+	</head>
+	<body>
+		<ui:composition template="masterLayout.xhtml ">
+			<ui:define name="pageTitle">
+				#{pageMsgs.basketTitle}
+			</ui:define>
+			<ui:define name="h1">
+				#{pageMsgs.basketTitle}
+			</ui:define>
+			<ui:define name="content">
+				<h:form>
+					<h:dataTable value="#{basketBean.basketLines}" var="basketLine" rowClasses="basket">
+						<h:column>
+							<h:outputText value="#{basketLine.good.name}" />
+						</h:column>
+						<h:column>
+							<h:outputText value="#{basketLine.good.price}" />
+						</h:column>
+						<h:column>
+							<h:panelGrid columns="1">
+								<h:commandButton action="#{basketBean.increment(basketLine)}" value="+" />
+								<h:inputText value="#{basketLine.quantity}" onchange="submit()"/>
+								<h:commandButton action="#{basketBean.decrement(basketLine)}" value="-" />
+							</h:panelGrid>
+						</h:column>
+						<h:column>
+							<h:commandButton action="#{basketBean.remove(basketLine)}" value="#{msgs.removeGoodFromBasket}" />
+						</h:column>
+					</h:dataTable>
+					<h:outputFormat value="#{msgs.orderPriceBasket}" >
+						<f:param value="#{basketBean.numberOfGoods}"/>
+						<f:param value="#{basketBean.basketPriceFormated}"/>
+					</h:outputFormat>
+					<h:commandButton rendered="#{not empty basketBean.basketLines}"  action="order?faces-redirect=true" value="#{msgs.proceedToCheckout}"/>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+	</body>
+</html>

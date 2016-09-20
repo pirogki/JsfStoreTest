@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<head>
+		<title>IGNORED</title>
+	</head>
+	<body>
+		<ui:composition template="masterLayout.xhtml ">
+			<ui:define name="pageTitle">
+				#{pageMsgs.confirmOrderTitle}
+			</ui:define>
+			<ui:define name="h1">
+				#{pageMsgs.confirmOrderTitle}
+			</ui:define>
+			<ui:define name="content">
+				<f:metadata>
+					<f:viewParam name="order_id" value="#{orderInfoBean.orderId}"/>
+				</f:metadata>
+				<p>
+					
+					<h:outputFormat value="#{pageMsgs.confirmOrderContent}">
+						<f:param value="#{orderInfoBean.orderId}"/>
+						<f:param value="#{orderInfoBean.orderPriceFormated}"/>
+					</h:outputFormat>
+				</p>
+			</ui:define>
+		</ui:composition>
+	</body>
+</html>

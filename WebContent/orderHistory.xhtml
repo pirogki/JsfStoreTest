@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+<title>IGNORED</title>
+</head>
+<body>
+	<ui:composition template="masterLayout.xhtml ">
+		<ui:define name="pageTitle">
+				#{pageMsgs.orderHistoryTitle}
+			</ui:define>
+		<ui:define name="h1">
+				#{pageMsgs.orderHistoryTitle}
+			</ui:define>
+		<ui:define name="content">
+			<ui:repeat var="order" value="#{orderHistoryBean.siteUser.orders}">
+			
+				<h:panelGrid columns="2" border="1">
+					<h:outputText value="#{msgs.orderNumber}" />
+					<h:outputText value="#{order.id}" />
+					
+					<h:outputText value="#{msgs.orderDate}" />
+					<h:outputText value="#{order.orderDate}" />
+					
+					<h:outputText value="#{msgs.orderPrice}" />
+					<h:outputText value="#{orderHistoryBean.countOrderPrice(order)}" />
+					
+					<h:outputText value="Размер order.orderStatuses" />
+					<h:outputText value="#{order.orderStatuses.size()}" />
+					
+					
+					
+
+		    		<h:outputText rendered="#{not empty order.orderStatuses}" value="#{msgs.orderStatus}" />
+					<h:outputText rendered="#{not empty order.orderStatuses}" value="#{order.orderStatuses.get(0).orderStatusesType.name}" />
+
+					<h:outputText rendered="#{not empty order.orderStatuses}" value="#{msgs.orderStatusDate}" />
+					<h:outputText rendered="#{not empty order.orderStatuses}" value="#{order.orderStatuses.get(0).statusDate}" />
+
+					
+					
+					<h:outputText value="#{msgs.orderList}" />
+					<h:dataTable value="#{order.goodsInOrders}" var="goodInOrder" border="1">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{msgs.name}" />
+							</f:facet>
+							<h:outputText value="#{goodInOrder.good.name}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{msgs.pricePerItem}" />
+							</f:facet>
+							<h:outputText value="#{goodInOrder.price}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{msgs.quantity}" />
+							</f:facet>
+							<h:outputText value="#{goodInOrder.quantity}" />
+						</h:column>
+					</h:dataTable>
+
+				</h:panelGrid>
+			</ui:repeat>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

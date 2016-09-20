@@ -1,0 +1,32 @@
+.heading {
+	margin:auto;
+	padding: 10px;
+}
+
+.sidebarLeft {
+	float:left;
+	width: 310px;
+}
+
+.content {
+	float: right;
+    width: 1570px;
+}
+table.topMenu {
+	margin: auto;
+    text-align: center;
+    font-size: 32px;
+}
+
+table.topMenu td {
+	padding: 10px;
+}
+
+.catalogItem {
+	float: left;
+	width: 500px;
+}
+
+.errorMessage{
+	color: red;
+}

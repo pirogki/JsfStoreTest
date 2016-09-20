@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<head>
+		<title>IGNORED</title>
+	</head>
+	<body>
+		<ui:composition template="masterLayout.xhtml ">
+			<ui:define name="pageTitle">
+				#{pageMsgs.catalogTitle}
+			</ui:define>
+			<ui:define name="h1">
+				#{pageMsgs.catalogTitle}
+			</ui:define>
+			<ui:define name="content">
+
+				 <ui:repeat var="product" value="#{catalogBean.goods}">
+				 	<div class="catalogItem">
+					 	<h:panelGrid colum="1">
+					 		<h:graphicImage title="#{product.name}" library="images" name="#{product.image.url}" />
+					 		
+					 		<h:outputText value="#{msgs.name}: #{product.name}" />
+					 		
+						 	<h:outputText value="#{msgs.brand}: #{product.brand.name}" />
+
+						 	<h:outputText value="#{msgs.category}: #{product.productCategory.name}" />
+
+						 	<h:outputText value="#{msgs.price}: #{product.price} #{msgs.currency}" />
+
+					 		<h:form>
+					 			<h:commandButton value="#{msgs.inBasket}" action="#{basketBean.addByGoodId(product.id)}"/>
+					 		</h:form>
+					 	</h:panelGrid>
+				 	</div>
+				 </ui:repeat>
+
+			</ui:define>
+		</ui:composition>
+	</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<head>
+		<title>IGNORED</title>
+	</head>
+	<body>
+		<ui:composition template="masterLayout.xhtml ">
+			<ui:define name="pageTitle">
+				#{pageMsgs.orderTitle}
+			</ui:define>
+			<ui:define name="h1">
+				#{pageMsgs.orderTitle}
+			</ui:define>
+			<ui:define name="content">
+				<h:outputText value="#{msgs.orderList}" />
+				<h:dataTable value="#{basketBean.basketLines}" var="basketLine" rowClasses="basket">
+					<h:column>
+						<h:outputText value="#{basketLine.good.name}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{basketLine.good.price}" />
+					</h:column>
+					<h:column>
+						<h:panelGrid columns="1">
+							<h:outputText value="#{basketLine.quantity}"/>
+						</h:panelGrid>
+					</h:column>
+				</h:dataTable>
+					
+				<h:outputFormat value="#{msgs.orderInfo}" >
+					<f:param value="#{basketBean.basketPriceFormated}"/>
+				</h:outputFormat>
+				
+				
+				<h:form>
+				    <h:panelGrid columns="3">
+					    
+					    <h:outputText value="#{msgs.firstName}"/>
+					    <h:inputText id="firstName" value="#{orderBean.firstName}"/>
+					    <h:message for="firstName" styleClass="errorMessage" />
+					    
+					    <h:outputText value="#{msgs.lastName}"/>
+					    <h:inputText id="lastName" value="#{orderBean.lastName}"/>
+					    <h:message for="lastName" styleClass="errorMessage" />
+					    
+					    <h:outputText value="#{msgs.middleName}"/>
+					    <h:inputText id="middleName" value="#{orderBean.middleName}"/>
+					    <h:message for="middleName" styleClass="errorMessage" />
+					    
+					    <h:outputText value="#{msgs.phone}"/>
+					    <h:inputText id="phone" value="#{orderBean.phone}" validatorMessage="#{msgs.notCorrectPhoneMessage}">
+							<f:validateRegex pattern="^\+[0-9]{11}$|^$|^$"></f:validateRegex>
+					    </h:inputText>
+					    <h:message for="phone" styleClass="errorMessage" />
+					    
+					    
+						<h:outputText value="#{msgs.address}"/>
+					    <h:inputText id="address" value="#{orderBean.address}"/>
+					    <h:message for="address" styleClass="errorMessage" />
+					    
+					   	<h:outputText value="#{msgs.email}"/>
+					    <h:inputText id="email" value="#{orderBean.email}" required="true" requiredMessage="#{msgs.emailRequired}" validatorMessage="#{msgs.notCorrectEmailMessage}">
+					    	<f:validateRegex pattern="^[^@]+@[^@\.]+\.[^@\.]+$|^$"></f:validateRegex>
+					    </h:inputText>
+					    <h:message for="email" styleClass="errorMessage" />
+					   				   
+					    <h:commandButton value="#{msgs.checkout}" action="#{orderBean.checkout()}"/>
+				    </h:panelGrid>
+			    </h:form>
+			</ui:define>
+		</ui:composition>
+	</body>
+</html>

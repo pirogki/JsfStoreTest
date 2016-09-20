@@ -1,0 +1,29 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:c="http://java.sun.com/jsp/jstl/core">
+    <c:choose>
+    	<c:when test="#{userBean.logged}">
+    		<h:outputFormat value="#{msgs.loginText}">
+				<f:param value="#{userBean.login}"/>
+			</h:outputFormat>
+			<h:form>
+				<h:commandLink action="#{userBean.logout()}" value="#{msgs.logout}" />
+			</h:form>
+    	</c:when>
+    	<c:otherwise>
+		    <h:form>
+			    <h:panelGrid colum="1">
+				    <h:outputText value="#{msgs.login}" />
+				    <h:inputText value="#{userBean.login}"/>
+				    <h:outputText value="#{msgs.password}" />
+				    <h:inputSecret value="#{userBean.password}"/>
+				    <h:commandButton value="#{msgs.loginButton}" action="#{userBean.login()}"/>
+				    <h:commandLink action="registration" value="#{pageMsgs.registrationTitle}" />
+			    </h:panelGrid>
+		    </h:form>
+    	</c:otherwise>
+    </c:choose>
+</ui:composition>
